@@ -41,14 +41,18 @@ function createNewsSubscriber(name: string): Observer {
 export default () => {
 	if (false) {
 		// Example usage
-		const newsPublisher = createNewsPublisher();
+		const { 
+      registerObserver,
+      removeObserver,
+      setLatestNews,
+    } = createNewsPublisher();
 
 		const subscriber1 = createNewsSubscriber("Subscriber 1");
 		const subscriber2 = createNewsSubscriber("Subscriber 2");
 
-		newsPublisher.registerObserver(subscriber1);
-		newsPublisher.registerObserver(subscriber2);
+		registerObserver(subscriber1);
+		registerObserver(subscriber2);
 
-		newsPublisher.setLatestNews("Breaking news: no, just joking!");
+		setLatestNews("Breaking news: no, just joking!");
 	}
 }
