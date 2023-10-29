@@ -1,6 +1,6 @@
 type Config = { [key: string]: string };
 
-const createConfigurationManager = (() => {
+const createConfigurationManager = () => {
   let instance: Config | null = null;
 
   return () => {
@@ -13,15 +13,15 @@ const createConfigurationManager = (() => {
     }
     return instance;
   };
-})();
+};
 
 export default () => {
-	if (false) {
+	if (true) {
 		// Example usage
 		const getConfigManager = createConfigurationManager();
 
-		const apiKey = getConfigManager["apiKey"];
-		const apiUrl = getConfigManager["apiUrl"];
+		const apiKey = getConfigManager()["apiKey"];
+		const apiUrl = getConfigManager()["apiUrl"];
 
 		console.log("API Key:", apiKey);
 		console.log("API URL:", apiUrl);
