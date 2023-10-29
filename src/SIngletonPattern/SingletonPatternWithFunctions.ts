@@ -16,7 +16,7 @@ const createConfigurationManager = () => {
 };
 
 export default () => {
-	if (true) {
+	if (false) {
 		// Example usage
 		const getConfigManager = createConfigurationManager();
 
