@@ -12,7 +12,7 @@ const createPayPalPayment = (email: string): PaymentStrategy => {
   };
 };
 
-const createCashPayment: PaymentStrategy = (amount: number) => {
+const cashPayment: PaymentStrategy = (amount: number) => {
   console.log(`Paid $${amount} in cash`);
 };
 
@@ -29,6 +29,6 @@ export default () => {
 		const payPalPayment = createPayPalPayment("john.doe@example.com");
 		checkout(50, payPalPayment);
 
-		checkout(75, createCashPayment);
+		checkout(75, cashPayment);
 	}
 }
