@@ -1,45 +1,52 @@
-type DataReader = () => string[];
-type DataProcessor = (data: string[]) => void;
+// Define a function to generate documents
+type DocumentGeneratorFn = () => void;
 
-function processDataTemplate(readData: DataReader, processData: DataProcessor) {
-  const data = readData();
-  processData(data);
-}
+// Function to create document generator with common steps
+const createDocumentGenerator = (fillContentFn: () => void): DocumentGeneratorFn => {
+  const prepareTemplate = (): void => {
+    console.log("Preparing document template.");
+  };
 
-const readCSVData: DataReader = () => {
-  console.log("Reading data from a CSV file...");
-  return ["John, Doe", "Jane, Smith", "Alice, Johnson"];
+  const finalizeDocument = (): void => {
+    console.log("Finalizing the generated document.");
+  };
+
+  return (): void => {
+    prepareTemplate();
+    fillContentFn();
+    finalizeDocument();
+  };
 };
 
-const processCSVData: DataProcessor = (data: string[]) => {
-  console.log("Processing CSV data:");
-  data.forEach((line) => {
-    const [firstName, lastName] = line.split(", ");
-    console.log(` - First Name: ${firstName}, Last Name: ${lastName}`);
-  });
-};
+// Functions to generate different types of documents
+const generateReport: DocumentGeneratorFn = createDocumentGenerator(() => {
+  console.log("Filling content for the report.");
+});
 
-const readJSONData: DataReader = () => {
-  console.log("Reading data from a JSON file...");
-  return ['{"name": "John", "age": 30}', '{"name": "Alice", "age": 25}'];
-};
+const generateInvoice: DocumentGeneratorFn = createDocumentGenerator(() => {
+  console.log("Filling content for the invoice.");
+});
 
-const processJSONData: DataProcessor = (data: string[]) => {
-  console.log("Processing JSON data:");
-  data.forEach((json) => {
-    const obj = JSON.parse(json);
-    console.log(` - Name: ${obj.name}, Age: ${obj.age}`);
-  });
-};
+const generateContract: DocumentGeneratorFn = createDocumentGenerator(() => {
+  console.log("Filling content for the contract.");
+});
+
 
 export default () => {
-	if (false) {
-		// Example usage
-		console.log("Processing CSV Data:");
-		processDataTemplate(readCSVData, processCSVData);
+	if (true) {
+    // Example usage
+    console.log("Generating Report:");
+    generateReport();
 
-		console.log("\nProcessing JSON Data:");
-		processDataTemplate(readJSONData, processJSONData);
+    console.log("---------------");
+
+    console.log("Generating Invoice:");
+    generateInvoice();
+
+    console.log("---------------");
+    
+    console.log("Generating Contract:");
+    generateContract();
 	}
 }
 

@@ -1,52 +1,63 @@
-abstract class DataProcessorTemplate {
-  abstract readData(): string[];
-  abstract processData(data: string[]): void;
+// Abstract class defining the template method for generating documents
+abstract class DocumentGenerator {
+  // The template method defines the document generation process.
+  public generateDocument(): void {
+    this.prepareTemplate();
+    this.fillContent();
+    this.finalizeDocument();
+  }
 
-  templateMethod(): void {
-    const data = this.readData();
-    this.processData(data);
+  // These methods are common across all documents.
+  protected prepareTemplate(): void {
+    console.log("Preparing document template.");
+  }
+
+  protected finalizeDocument(): void {
+    console.log("Finalizing the generated document.");
+  }
+
+  // This method is abstract and must be implemented by concrete subclasses.
+  protected abstract fillContent(): void;
+}
+
+// Concrete subclass for generating reports
+class ReportGenerator extends DocumentGenerator {
+  protected fillContent(): void {
+    console.log("Filling content for the report.");
   }
 }
 
-class CSVDataProcessor extends DataProcessorTemplate {
-  readData(): string[] {
-    console.log("Reading data from a CSV file...");
-    return ["John, Doe", "Jane, Smith", "Alice, Johnson"];
-  }
-
-  processData(data: string[]): void {
-    console.log("Processing CSV data:");
-    data.forEach((line) => {
-      const [firstName, lastName] = line.split(", ");
-      console.log(` - First Name: ${firstName}, Last Name: ${lastName}`);
-    });
+// Concrete subclass for generating invoices
+class InvoiceGenerator extends DocumentGenerator {
+  protected fillContent(): void {
+    console.log("Filling content for the invoice.");
   }
 }
 
-class JSONDataProcessor extends DataProcessorTemplate {
-  readData(): string[] {
-    console.log("Reading data from a JSON file...");
-    return ['{"name": "John", "age": 30}', '{"name": "Alice", "age": 25}'];
-  }
-
-  processData(data: string[]): void {
-    console.log("Processing JSON data:");
-    data.forEach((json) => {
-      const obj = JSON.parse(json);
-      console.log(` - Name: ${obj.name}, Age: ${obj.age}`);
-    });
+// Concrete subclass for generating contracts
+class ContractGenerator extends DocumentGenerator {
+  protected fillContent(): void {
+    console.log("Filling content for the contract.");
   }
 }
 
 export default () => {
-	if (false) {
+	if (true) {
 		// Example usage
-    const csvProcessor = new CSVDataProcessor();
-    console.log("Processing CSV Data:");
-    csvProcessor.templateMethod();
+    const reportGenerator = new ReportGenerator();
+    console.log("Generating Report:");
+    reportGenerator.generateDocument();
 
-    const jsonDataProcessor = new JSONDataProcessor();
-    console.log("\nProcessing JSON Data:");
-    jsonDataProcessor.templateMethod();
+    console.log("---------------");
+
+    const invoiceGenerator = new InvoiceGenerator();
+    console.log("Generating Invoice:");
+    invoiceGenerator.generateDocument();
+
+    console.log("---------------");
+
+    const contractGenerator = new ContractGenerator();
+    console.log("Generating Contract:");
+    contractGenerator.generateDocument();
 	}
 }
