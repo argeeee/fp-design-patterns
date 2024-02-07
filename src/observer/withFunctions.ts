@@ -1,58 +1,69 @@
-// Observer (Subscriber) function contract
-type Observer = (message: string) => void;
+// Observer interface
+interface Observer {
+  update(message: any): void;
+}
 
-// Subject (observable)
-function createNewsPublisher() {
-  const observers: Observer[] = [];
-  let latestNews: string = "";
+// Subject interface
+interface Subject {
+  attach(observer: Observer): void;
+  detach(observer: Observer): void;
+  notify(message: any): void;
+  someBusinessLogic(): void;
+}
 
-  function registerObserver(observer: Observer) {
+// Concrete Subject
+const createConcreteSubject = (): Subject => {
+  let observers: Observer[] = [];
+
+  const attach = (observer: Observer): void => {
     observers.push(observer);
-  }
-
-  function removeObserver(observer: Observer) {
-    const index = observers.indexOf(observer);
-    if (index !== -1) {
-      observers.splice(index, 1);
-    }
-  }
-
-  function notifyObservers() {
-    for (const observer of observers) {
-      observer(latestNews);
-    }
-  }
-
-  function setLatestNews(news: string) {
-    latestNews = news;
-    notifyObservers();
-  }
-
-  return { registerObserver, removeObserver, setLatestNews };
-}
-
-// Concrete Observer (Subscriber) function
-function createNewsSubscriber(name: string): Observer {
-  return (message: string) => {
-    console.log(`${name} received news: ${message}`);
   };
-}
+
+  const detach = (observer: Observer): void => {
+    observers = observers.filter(obs => obs !== observer);
+  };
+
+  const notify = (message: any): void => {
+    observers.forEach(observer => observer.update(message));
+  };
+
+  const someBusinessLogic = (): void => {
+    console.log("ConcreteSubject: Performing some business logic.");
+    // After performing some business logic, notify observers.
+    notify("Some message to notify observers.");
+  };
+
+  return { attach, detach, notify, someBusinessLogic };
+};
+
+// Concrete Observers
+const createFirstConcreteObserver = (name: string): Observer => ({
+  update: (message: any): void => {
+    console.log(`(First) ${name} received message:`, message);
+  }
+});
+
+const createSecondConcreteObserver = (name: string): Observer => ({
+  update: (message: any): void => {
+    console.log(`(Second) ${name} received message:`, message);
+  }
+});
 
 export default () => {
 	if (false) {
 		// Example usage
-		const { 
-      registerObserver,
-      removeObserver,
-      setLatestNews,
-    } = createNewsPublisher();
+    const subject = createConcreteSubject();
 
-		const subscriber1 = createNewsSubscriber("Subscriber 1");
-		const subscriber2 = createNewsSubscriber("Subscriber 2");
+    const observer1 = createFirstConcreteObserver("Observer 1");
+    const observer2 = createSecondConcreteObserver("Observer 2");
 
-		registerObserver(subscriber1);
-		registerObserver(subscriber2);
+    subject.attach(observer1);
+    subject.attach(observer2);
 
-		setLatestNews("Breaking news: no, just joking!");
+    subject.someBusinessLogic();
+
+    subject.detach(observer1);
+
+    subject.someBusinessLogic();
 	}
 }

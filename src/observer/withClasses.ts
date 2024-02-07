@@ -1,63 +1,82 @@
-// Observer interface that concrete observers implement
+// Observer interface
 interface Observer {
-  update(message: string): void;
+  update(message: any): void;
 }
 
-// Subject (observable) interface
+// Subject interface
 interface Subject {
-  registerObserver(observer: Observer): void;
-  removeObserver(observer: Observer): void;
-  notifyObservers(): void;
+  attach(observer: Observer): void;
+  detach(observer: Observer): void;
+  notify(message: any): void;
+  someBusinessLogic(): void;
 }
 
-// Concrete Subject (observable)
-class NewsPublisher implements Subject {
+// Concrete Subject
+class ConcreteSubject implements Subject {
   private observers: Observer[] = [];
-  private latestNews: string = "";
 
-  registerObserver(observer: Observer): void {
+  attach(observer: Observer): void {
     this.observers.push(observer);
   }
 
-  removeObserver(observer: Observer): void {
+  detach(observer: Observer): void {
     const index = this.observers.indexOf(observer);
     if (index !== -1) {
       this.observers.splice(index, 1);
     }
   }
 
-  notifyObservers(): void {
-    for (const observer of this.observers) {
-      observer.update(this.latestNews);
-    }
+  notify(message: any): void {
+    this.observers.forEach(observer => observer.update(message));
   }
 
-  setLatestNews(news: string): void {
-    this.latestNews = news;
-    this.notifyObservers();
+  someBusinessLogic(): void {
+    console.log("ConcreteSubject: Performing some business logic.");
+    // After performing some business logic, notify observers.
+    this.notify("Some message to notify observers.");
   }
 }
 
-// Concrete Observer
-class NewsSubscriber implements Observer {
-  constructor(private name: string) {}
+// Concrete Observers
+class FirstConcreteObserver implements Observer {
+  private name: string;
 
-  update(message: string): void {
-    console.log(`${this.name} received news: ${message}`);
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  update(message: any): void {
+    console.log(`(First) ${this.name} received message:`, message);
+  }
+}
+
+class SecondConcreteObserver implements Observer {
+  private name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  update(message: any): void {
+    console.log(`(Second) ${this.name} received message:`, message);
   }
 }
 
 export default () => {
 	if (false) {
 		// Example usage
-		const newsPublisher = new NewsPublisher();
+		const subject = new ConcreteSubject();
 
-		const subscriber1 = new NewsSubscriber("Subscriber 1");
-		const subscriber2 = new NewsSubscriber("Subscriber 2");
+    const observer1 = new FirstConcreteObserver("Observer 1");
+    const observer2 = new SecondConcreteObserver("Observer 2");
 
-		newsPublisher.registerObserver(subscriber1);
-		newsPublisher.registerObserver(subscriber2);
+    subject.attach(observer1);
+    subject.attach(observer2);
 
-		newsPublisher.setLatestNews("Breaking news: no, just joking!");
+    subject.someBusinessLogic();
+
+    subject.detach(observer1);
+
+    subject.someBusinessLogic();
 	}
 }
