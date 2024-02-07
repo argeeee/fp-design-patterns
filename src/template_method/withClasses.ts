@@ -42,7 +42,7 @@ class ContractGenerator extends DocumentGenerator {
 }
 
 export default () => {
-	if (true) {
+	if (false) {
 		// Example usage
     const reportGenerator = new ReportGenerator();
     console.log("Generating Report:");

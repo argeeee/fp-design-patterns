@@ -33,7 +33,7 @@ const generateContract: DocumentGeneratorFn = createDocumentGenerator(() => {
 
 
 export default () => {
-	if (true) {
+	if (false) {
     // Example usage
     console.log("Generating Report:");
     generateReport();
