@@ -27,9 +27,6 @@ const proxyRequestFn = (realRequestFn: RequestFn): RequestFn => {
 	};
 };
 
-
-
-
 export default () => {
 	if (false) {
 		// Example usage
