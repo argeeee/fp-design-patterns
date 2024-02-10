@@ -20,11 +20,13 @@ export default () => {
 		// Example usage
 		const getConfigManager = createConfigurationManager();
 
+		console.log(getConfigManager() === getConfigManager()); // Output will be true, as both instances are the same
+
+
 		const apiKey = getConfigManager()["apiKey"];
 		const apiUrl = getConfigManager()["apiUrl"];
 
 		console.log("API Key:", apiKey);
 		console.log("API URL:", apiUrl);
-
 	}
 }
