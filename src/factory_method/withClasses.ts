@@ -83,22 +83,22 @@ class SpreadsheetFactory extends DocumentFactory {
 }
 
 export default () => {
-	if (false) {
-		// Example usage
-		console.log('Creating and managing a report document...');
-		const reportFactory = new ReportFactory();
-		reportFactory.createAndManageDocument();
+  if (false) {
+    // Example usage
+    console.log('Creating and managing a report document...');
+    const reportFactory = new ReportFactory();
+    reportFactory.createAndManageDocument();
 
-		console.log('');
+    console.log('');
 
-		console.log('Creating and managing a presentation document...');
-		const presentationFactory = new PresentationFactory();
-		presentationFactory.createAndManageDocument();
+    console.log('Creating and managing a presentation document...');
+    const presentationFactory = new PresentationFactory();
+    presentationFactory.createAndManageDocument();
 
-		console.log('');
+    console.log('');
 
-		console.log('Creating and managing a spreadsheet document...');
-		const spreadsheetFactory = new SpreadsheetFactory();
-		spreadsheetFactory.createAndManageDocument();
-	}
+    console.log('Creating and managing a spreadsheet document...');
+    const spreadsheetFactory = new SpreadsheetFactory();
+    spreadsheetFactory.createAndManageDocument();
+  }
 }
