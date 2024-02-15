@@ -43,22 +43,22 @@ const createComputerBuilder = (motherboard: string, processor: string) => {
 	let graphicsCard = "";
 	let monitor = "";
 
-	const setMemory = (memorySize: number) => {
+	const withMemory = (memorySize: number) => {
 		memory = memorySize;
 		return builder;
 	};
 
-	const setStorage = (storageSize: number) => {
+	const withStorage = (storageSize: number) => {
 		storage = storageSize;
 		return builder;
 	};
 
-	const setGraphicsCard = (card: string) => {
+	const withGraphicsCard = (card: string) => {
 		graphicsCard = card;
 		return builder;
 	};
 
-	const setMonitor = (monitorSpec: string) => {
+	const withMonitor = (monitorSpec: string) => {
 		monitor = monitorSpec;
 		return builder;
 	};
@@ -73,10 +73,10 @@ const createComputerBuilder = (motherboard: string, processor: string) => {
 	);
 
 	const builder = {
-		setMemory,
-		setStorage,
-		setGraphicsCard,
-		setMonitor,
+		withMemory,
+		withStorage,
+		withGraphicsCard,
+		withMonitor,
 		build
 	};
 
@@ -84,20 +84,20 @@ const createComputerBuilder = (motherboard: string, processor: string) => {
 };
 
 export default () => {
-	if (false) {
+	if (true) {
 		// Example usage
 		const gamingComputer = createComputerBuilder("Gaming Motherboard", "Intel i7")
-			.setMemory(16)
-			.setStorage(1000)
-			.setGraphicsCard("NVIDIA RTX 3080")
-			.setMonitor("27-inch 4K")
+			.withMemory(16)
+			.withStorage(1000)
+			.withGraphicsCard("NVIDIA RTX 3080")
+			.withMonitor("27-inch 4K")
 			.build();
 
 		const officeComputer = createComputerBuilder("Office Motherboard", "Intel i5")
-			.setMemory(8)
-			.setStorage(500)
-			.setGraphicsCard("Integrated")
-			.setMonitor("24-inch 1080p")
+			.withMemory(8)
+			.withStorage(500)
+			.withGraphicsCard("Integrated")
+			.withMonitor("24-inch 1080p")
 			.build();
 
 		// Display computer configurations
