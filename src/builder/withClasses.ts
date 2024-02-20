@@ -69,7 +69,7 @@ class ComputerBuilder {
 }
 
 export default () => {
-  if (true) {
+  if (false) {
     // Example usage
     const gamingComputer = new ComputerBuilder("Gaming Motherboard", "Intel i7")
       .withMemory(16)

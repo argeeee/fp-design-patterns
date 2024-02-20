@@ -46,9 +46,9 @@ function createAndDrawGraphic(type: string): void {
 }
 
 export default () => {
-	if (false) {
-		// Example usage
-		createAndDrawGraphic('rectangle');
-		createAndDrawGraphic('circle');
-	}
+  if (false) {
+    // Example usage
+    createAndDrawGraphic('rectangle');
+    createAndDrawGraphic('circle');
+  }
 }

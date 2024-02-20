@@ -84,7 +84,7 @@ const createComputerBuilder = (motherboard: string, processor: string) => {
 };
 
 export default () => {
-  if (true) {
+  if (false) {
     // Example usage
     const gamingComputer = createComputerBuilder("Gaming Motherboard", "Intel i7")
       .withMemory(16)
