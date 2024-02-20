@@ -16,17 +16,17 @@ const createConfigurationManager = () => {
 };
 
 export default () => {
-	if (false) {
-		// Example usage
-		const getConfigManager = createConfigurationManager();
+  if (false) {
+    // Example usage
+    const getConfigManager = createConfigurationManager();
 
-		console.log(getConfigManager() === getConfigManager()); // Output will be true, as both instances are the same
+    console.log(getConfigManager() === getConfigManager()); // Output will be true, as both instances are the same
 
 
-		const apiKey = getConfigManager()["apiKey"];
-		const apiUrl = getConfigManager()["apiUrl"];
+    const apiKey = getConfigManager()["apiKey"];
+    const apiUrl = getConfigManager()["apiUrl"];
 
-		console.log("API Key:", apiKey);
-		console.log("API URL:", apiUrl);
-	}
+    console.log("API Key:", apiKey);
+    console.log("API URL:", apiUrl);
+  }
 }
